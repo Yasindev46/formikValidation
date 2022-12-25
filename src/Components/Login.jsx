@@ -27,7 +27,7 @@ export const Login = () => {
           <CardContent align="center">
             <Grid container spacing={3}>
               <Grid item xs={12}>
-                <h1>Employee Login </h1>
+                <h1>Login Form</h1>
               </Grid>
               <Grid item xs={12}>
                 <TextField
