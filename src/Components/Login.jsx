@@ -58,7 +58,7 @@ export const Login = () => {
               </Grid>
               <Grid item xs={12}>
                 <p>
-                  Don't have an account? <a href="">Register here</a>
+                  Don't have an account? <a href="/register">Register here</a>
                 </p>
               </Grid>
             </Grid>
