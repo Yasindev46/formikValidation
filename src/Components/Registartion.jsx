@@ -1,9 +1,21 @@
-import React from "react";
-import { Button, Card, CardContent, TextField, Grid } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  Grid,
+  Alert,
+} from "@mui/material";
 import { useFormik } from "formik";
 import { Registerschema } from "../Validation/yupValidation";
+import axios from "axios";
 
 export const Registration = () => {
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+
   const initialValues = {
     name: "",
     email: "",
@@ -15,11 +27,18 @@ export const Registration = () => {
   const { values, handleSubmit, errors, handleChange } = useFormik({
     initialValues: initialValues,
     validationSchema: Registerschema,
-    onSubmit: (values) => {
-      console.log("formikValues===>", values);
+    onSubmit: async (values) => {
+      const result = await axios.post("http://localhost:2525/adduser", values);
+      setMsg(result.data);
     },
   });
-  console.log("===>YupError", errors);
+  useEffect(() => {
+    if (msg !== "") {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [msg]);
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
@@ -100,6 +119,9 @@ export const Registration = () => {
                 <Button variant="contained" type="submit">
                   Register
                 </Button>
+              </Grid>
+              <Grid item xs={12}>
+                {msg !== "" && <Alert severity="success">{msg}</Alert>}
               </Grid>
               <Grid item xs={12}>
                 <p>
