@@ -1,5 +1,9 @@
 name: validate files
-on: push
+on: 
+    workflow_dispatch:
+    push:
+        branches:
+            - main
 jobs:
     validate-index:
         runs-on: ubuntu-latest
