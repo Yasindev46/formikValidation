@@ -1,0 +1,23 @@
+name: install dependencies
+on: 
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+jobs:
+    install-dependencies:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: pull code
+              uses: actions/checkout@v4
+            
+            - name: install node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: '20'
+            - name: install dependencies
+              run: npm ci
+
+    
+
