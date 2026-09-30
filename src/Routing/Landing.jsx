@@ -11,7 +11,7 @@ export const Landing=()=>{
                 <Routes>
                     <Route path="/" element={<Login/>}/>
                     <Route path="/register" element={<Registration/>}/>
-                    <Route path="/forgot" element={<Forgotpassword/>}/>
+                    <Route path="/forgot-password" element={<Forgotpassword/>}/>
                 </Routes>
              </BrowserRouter>
         </React.Fragment>

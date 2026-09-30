@@ -1,7 +1,8 @@
 import { Button, Card, CardContent, TextField, Grid } from "@mui/material";
-import React from "react";
-import { useState } from "react";
+import React, { useEffect,useState} from "react";
 import { validation } from "../Validation/LoginValidation";
+import { useNavigate,Link } from "react-router-dom";
+import axios from "axios";
 
 export const Login = () => {
   let a = "";
@@ -11,6 +12,11 @@ export const Login = () => {
     password: "",
   });
 
+  const getData=async()=>{
+    const data=await axios.get("http://localhost:4040/api/users")
+  }
+  const navigate=useNavigate()
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -18,8 +24,10 @@ export const Login = () => {
     e.preventDefault();
     setError(validation(values));
   };
-  console.log(error, "===>");
 
+  useEffect(()=>{
+getData()
+  },[])
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
@@ -39,7 +47,6 @@ export const Login = () => {
                 />
 
                 {error && <p style={{ color: "red" }}>{error.email}</p>}
-                {/* {error?<p style={{color:"red"}}>{error.email}</p>:""} */}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -58,7 +65,10 @@ export const Login = () => {
               </Grid>
               <Grid item xs={12}>
                 <p>
-                  Don't have an account? <a href="">Register here</a>
+                  Forgot your password? <Link to="/forgot-password">Reset here</Link>
+                </p>
+                <p>
+                  Don't have an account? <Link to="/register">Register here</Link>
                 </p>
               </Grid>
             </Grid>
